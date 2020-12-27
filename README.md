@@ -5,7 +5,7 @@
 [여기](https://docs.google.com/document/d/1aNvfxmfV1EfTn5taj55e0NNJAZxRZSOedg5M4Rh2S7s/edit?usp=sharing)
 에서 확인할 수 있습니다. 
 
-## guideline
+## Guideline
 - 각자 PC에서 git을 설치한 후에, 리모트 -> 로컬 저장소 생성  
 맥은 터미널에서 진행하면 되고, 윈도우는 아마 git bash에서 진행하면 되는 걸로 알고 있습니다.  
 ```bash
@@ -20,17 +20,23 @@ git clone https://github.com/AMYMEME/algorithm-study.git
 
 - 모든 문제는 파이참이나 인텔리제이 같은 에디에서 Open으로 열어서 수정 후
 터미널에서 git push 해도 되고, 단순히 터미널에서 vi로 붙여넣어도 됩니다.  
-에디터를 사용하실 경우 자동으로 생성되는 `.idea/`등 필요없는 파일들은 `.gitignore`에 추가해서 `main`으로 `git push` 해주세요.
-한 주 스터디가 끝날 때마다 모든 브랜치를 merge 할 것이기 때문에, `git push`가 되지 않으면 `git pull`진행 후 해보시거나, 
+에디터를 사용하실 경우 자동으로 생성되는 `.idea/`등 필요없는 파일들은 `.gitignore`에 추가해서 `main`으로 `git push` 해주세요.  
+공통 문제와 개인 문제를 모두 올려주신 이후 다른 사람이 쉽게 볼 수 있게 깃허브 사이트에서 `Pull requests`이용해서 PR 띄워주세요!(`자기 브랜치` -> `main`)  
+한 주 스터디가 끝날 때마다 모든 브랜치를 `merge` 할 것이기 때문에, `git push`가 되지 않으면 `git pull`진행 후 해보시거나, 
 카톡방에 올려주세요!  
 
 
 - 공통 문제는 `/common/스터디 날짜`에 올려주시면 됩니다.  
 문제를 모두 풀든 못 풀든 마감시간 전에 깃 리모트 저장소에 올려주시면 됩니다.  
-`git push origin {브랜치명}`으로 올려주시면 되고, 다른 사람이 쉽게 볼 수 있게
-올려주신 이후 깃허브 사이트에서 `Pull requests`이용해서 PR 띄워주세요!(`자기 브랜치` -> `main`)  
+`git add 파일`, `git commit -m "{커밋 메시지}"` 이후, 
+`git push origin {브랜치명}`으로 올려주시면 됩니다.
 
 
 - 개인(선택) 문제는 루터 하위에 폴더를 새로 생성후 올려주시면 됩니다.(ex : `/amymeme`)  
+위 처럼 `git push` 진행하시면 됩니다.  
 폴더명은 자유이고, 날짜별 폴더를 만들거나 파일 이름을 날짜별로 해주시면 감사하겠습니다. (ex : `20210106.java`, `20200106.py`...)   
 코드 뿐만 아니라 관련 개념 정리나 푸는 과정에서 든 생각들을 기록하셔도 상관없습니다 :)
+
+## 문제목록
+### `2021.01.06` 
+- [x] [백준 #9012](https://www.acmicpc.net/problem/9012)
