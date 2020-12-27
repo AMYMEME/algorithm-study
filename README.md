@@ -20,7 +20,7 @@ git clone https://github.com/AMYMEME/algorithm-study.git
 
 - 모든 문제는 파이참이나 인텔리제이 같은 에디에서 Open으로 열어서 수정 후
 터미널에서 git push 해도 되고, 단순히 터미널에서 vi로 붙여넣어도 됩니다.  
-에디터를 사용하실 경우 자동으로 생성되는 `.idea/`등 필요없는 파일들은 `.gitignore`에 추가해서 `master`로 `git push` 해주세요.
+에디터를 사용하실 경우 자동으로 생성되는 `.idea/`등 필요없는 파일들은 `.gitignore`에 추가해서 `main`으로 `git push` 해주세요.
 한 주 스터디가 끝날 때마다 모든 브랜치를 merge 할 것이기 때문에, `git push`가 되지 않으면 `git pull`진행 후 해보시거나, 
 카톡방에 올려주세요!  
 
