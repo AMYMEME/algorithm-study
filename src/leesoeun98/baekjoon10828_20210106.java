@@ -39,6 +39,53 @@ public class baekjoon10828_20210106 {
 				
 			}
 		}
+		
+		/*
+		 * ArrayList 말고 내장된 Stack 사용하면 더 간단하다.
+		 * 예로 Stack<Integer> stack = new Stack<Integer>();
+		 * 위와 같이 사용하면 별도로 함수 안만들고 main 함수 분기처리 시 가능  
+		 * 
+		 * Stack<Integer> stack = new Stack<Integer>();
+		 * 
+		 * for(int i=0;i<count;i++) {
+			st = new StringTokenizer(br.readLine(), " ");
+			switch(st.nextToken()) {
+			case "push":
+			 	int num = Integer.parseInt(st.nextToken());
+				stack.push(num);
+				break;
+			case "top":
+				if(stack.size()<1){
+				System.out.println(-1);
+				}
+				else{
+					System.out.println(stack.peek());
+				}
+				break;
+			case "size":
+				System.out.println(stack.size());
+				break;
+			case "empty":
+				if(stack.size()<1){
+				System.out.println(1);
+				}
+				else{
+					System.out.println(0);
+				}
+				break;
+			case "pop":
+				if(stack.size()<1){
+				System.out.println(-1);
+				}
+				else{
+					int top = stack.pop();
+					System.out.println(top);
+				}break;
+				
+			}
+		}
+		 * */
+
 
 	}
 	
