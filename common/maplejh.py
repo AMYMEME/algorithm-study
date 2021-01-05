@@ -18,10 +18,3 @@ if __name__ == "__main__":
     for i in range(n):
         a=input()
         print(check_vps(a))
-
-
-
-
-
-    
-
