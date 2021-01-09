@@ -1,3 +1,6 @@
+# https://www.acmicpc.net/problem/15686
+# 백준 15686
+
 import sys
 from itertools import combinations
 
