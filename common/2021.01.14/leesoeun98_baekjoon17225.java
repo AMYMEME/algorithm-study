@@ -1,5 +1,3 @@
-package common;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -9,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
-public class leesoeun98_baekjoon17225 {
+public class baekjoon17225 {
 	static class Pair implements Comparable<Pair> {
 		int startTime;
 		String color;
