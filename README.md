@@ -50,3 +50,10 @@ git clone https://github.com/AMYMEME/algorithm-study.git
 
 - [x] [백준 #15686](https://www.acmicpc.net/problem/15686)
 - [x] [백준 #17225](https://www.acmicpc.net/problem/17225)
+
+### `2021.01.21`
+
+- [x] [백준 #14502](https://www.acmicpc.net/problem/14502)
+- [x] [백준 #11286](https://www.acmicpc.net/problem/11286)
+
+
