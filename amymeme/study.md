@@ -6,3 +6,37 @@ python의 heapq 모듈로 구현되어 있고, `from quere import PriorityQueue`
 최대 크기를 가진 pq가 필요하다면, `PriorityQueue(maxsize=10)`이렇게 사용하면 된다.  
 `(우선순위, 값)` 튜플로 데이터를 추가하고, 단순 오름차순이 아닌 다른 기준으로 원소가 정렬됨
 
+
+## `힙`
+힙은 최소힙, 최대힙이 있으며, 우선순위 큐에서 get하는 것은, min heap에서 루트를 뽑는 것과 같다.  
+위의 priorityQueue 모듈보다는 heapq가 더 많이 쓰이는 것 같다.
+min heap에서는 원소들이 항상 정렬된 상태로 추가되고 삭제되며,
+가장 작은 ㄱ밧은 언제나 인덱스 0인 루트에 위치한다.
+```python
+heap[k] <= heap[2*k+1] and head[k] <= heap[2*k+2]
+```
+내장 모듈인 `import heapq`을 쓰면, 보통 리스트를 최소 힙으로 이용할 수 있다.
+`heapq` 모듈 함수를 호출할 때마다 이 리스트를 인자로 넘겨주면 된다.
+
+```python
+mylist = []
+heapq.heappush(mylist, 4)
+heapq.heappop(mylist)
+new_list = [1,6,3,8,5,5,3,8,9]
+heapq.heapfity(new_list) # O(N)
+``` 
+최대 힙을 사용하려면, 튜플을 이용해야 하고, `prioirityQueue` 처럼 `(우선순위, 값)` 형태로 넣으면 된다.
+
+### `힙 정렬`
+```python
+import heapq
+
+def heap_sort(nums):
+    heap = []
+    for num in nums:
+        heapq.heappush(heap, num)
+    sorted_nums = []
+    while heap:
+        sorted_nums.append(heapq.heappop(heap))
+    return sorted_nums
+```
