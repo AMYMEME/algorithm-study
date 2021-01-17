@@ -5,14 +5,13 @@ import heapq
 import sys
 from itertools import repeat
 
-
 N, M, K = map(int, sys.stdin.readline().split())
 lines = [[] for i in repeat(None, M)]
 count = 0
 
 for original_turn in range(N):
     D, H = map(int, sys.stdin.readline().split())
-    lines[original_turn % M].append((D, H, original_turn%M, original_turn))
+    lines[original_turn % M].append((D, H, original_turn % M, original_turn))
 
 head = []
 
