@@ -1,0 +1,59 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+
+public class bakejoon19640 {
+    static class Person implements Comparable<Person> {
+        int num;
+        int lineNumber;
+        int workDay;
+        int hurry;
+
+        public Person(int lineNumber, int workDay, int hurry, int num) {
+            this.lineNumber = lineNumber;
+            this.workDay = workDay;
+            this.hurry = hurry;
+            this.num = num;
+        }
+
+        @Override
+        public int compareTo(Person p) {
+            if (this.workDay == p.workDay) {
+                int hurry = p.hurry - this.hurry;
+                if (hurry == 0) return p.lineNumber - this.lineNumber;
+                return hurry;
+            }
+            return p.workDay - this.workDay;
+        }
+    }
+
+    static int m;
+    static PriorityQueue<Person> wclines = new PriorityQueue<Person>();
+    static LinkedList<Person>[] employee = new LinkedList[m];
+
+    static public void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        m = scan.nextInt();
+        int k = scan.nextInt(); //데카는 k+1번
+        int count = 0;
+        for (int i = 0; i < m; i++) employee[i] = new LinkedList<Person>();
+
+        for (int i = 0; i < n; i++) {
+            int lineNumber = i % m;
+            int work = scan.nextInt();
+            int hurry = scan.nextInt();
+            employee[i % m].add(new Person(lineNumber, work, hurry, i));
+        }
+        for (int i=0;i<m;i++) {
+            if(employee[i].size()==0) break;
+            Person person = employee[i].remove(0);
+            wclines.add(person);
+        }
+        while (!wclines.isEmpty()) {
+            Person p = wclines.poll();
+            System.out.println(p.lineNumber);
+        }
+    }
+}
