@@ -1,0 +1,89 @@
+import java.util.Scanner;
+
+public class baekjoon14891 {
+    static int wheel[][];
+
+    static public void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        wheel = new int[4][8];
+        int sum=0;
+        for (int i = 0; i < 4; i++) {
+            String n = scan.next();
+            for (int j = 0; j < 8; j++) {
+                wheel[i][j] = Integer.parseInt(String.valueOf(n.charAt(j)));
+            }
+        }
+        int k = scan.nextInt();
+        for (int i = 0; i < k; i++) {
+            int num = scan.nextInt();
+            int d = scan.nextInt();
+            boolean direction;
+            direction = d == -1 ? false : true;
+
+            solution(num - 1, direction);
+        }
+        //합 구하기
+        for(int i=0;i<4;i++){
+            if(wheel[i][0]==0){
+                sum+=0;
+            }
+            else{
+                sum+=Math.pow(2, i);
+            }
+        }
+        System.out.println(sum);
+    }
+
+    //num은 0~3
+    static void solution(int num, boolean direction) {
+        //회전하기 전에 왼, 오른쪽 톱니바퀴 회전 여부 결정됨
+        //왼 확인, 극이 다르면 왼쪽 톱니바퀴 회전
+        left(num - 1, !direction);
+        //오 확인, 극이 다르면 오른쪽 톱니바퀴 회전
+        right(num + 1, !direction);
+        //원래 돌리려던 톱니바퀴 회전
+        rotation(num, direction);
+    }
+
+    static void left(int num, boolean direction) {
+        //num은 돌리려는 톱니바퀴 (처음 입력한 톱니바퀴의 왼쪽거)
+        //num은 0~3이니까 등호 들어감. 매우 주의
+        if (num >= 0) {
+            if (wheel[num][2] != wheel[num + 1][6]) {
+                left(num - 1, !direction);
+                rotation(num, direction);
+            }
+        }
+    }
+
+    static void right(int num, boolean direction) {
+        //num은 돌리려는 톱니바퀴 (처음 입력한 톱니바퀴의 오른쪽거)
+        //num은 0~3이니까 등호 들어감. 매우 주의
+        if (num <= 3) {
+            if (wheel[num][6] != wheel[num - 1][2]) {
+                right(num + 1, !direction);
+                rotation(num, direction);
+            }
+        }
+    }
+
+    static void rotation(int num, boolean direction) {
+        // 반시계
+        if (direction == false) {
+            int temp = wheel[num][0];
+            for (int i = 0; i < 7; i++) {
+                wheel[num][i] = wheel[num][i + 1];
+            }
+            wheel[num][7] = temp;
+        } else {
+            int temp = wheel[num][7];
+            //값 덮어지는 것에 주의
+            for (int i = 7; i > 0; i--) {
+                wheel[num][i] = wheel[num][i - 1];
+            }
+            wheel[num][0] = temp;
+        }
+    }
+}
+
+
