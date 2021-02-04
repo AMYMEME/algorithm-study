@@ -26,11 +26,9 @@ def work():
     top = cleaner[0][0]
     down = cleaner[1][0]
 
-    board[top - 1][0] = 0
     for i in range(top - 1, 0, -1):
         board[i][0] = board[i - 1][0]
 
-    board[down + 1][0] = 0
     for i in range(down + 1, R - 1):
         board[i][0] = board[i + 1][0]
 
@@ -40,7 +38,7 @@ def work():
 
     for i in range(top):
         board[i][C - 1] = board[i + 1][C - 1]
-    for i in range(R - 1, R - 1 - down, -1):
+    for i in range(R - 1, down, -1):
         board[i][C - 1] = board[i - 1][C - 1]
 
     for i in range(C - 1, 1, -1):
