@@ -4,46 +4,46 @@
 import sys
 
 
-def make_tetromino(ci, cj):
-    if len(polyominos) == 4:
-        calculate(polyominos)
+def make_tetromino(ci, cj, sum_value, count):
+    global answer
+    if count == 4:
+        answer = max(answer, sum_value)
         return
     for di, dj in diff:
-        ni, nj = di + ci, dj + cj
-        if -1 < ni < N and -1 < nj < M and (ni, nj) not in polyominos:
-            polyominos.add((ni, nj))
-            make_tetromino(ni, nj)
-            polyominos.remove((ni, nj))
+        ni = di + ci
+        nj = dj + cj
+        if -1 < ni < N and -1 < nj < M and check[ni][nj] == 0:
+            check[ni][nj] = 1
+            make_tetromino(ni, nj, sum_value + board[ni][nj], count + 1)
+            check[ni][nj] = 0
 
 
 def make_woo(ci, cj):
-    if ci < N - 1 and 0 < cj < M - 1:
-        calculate({(ci, cj), (ci, cj - 1), (ci, cj + 1), (ci + 1, cj)})  # ㅜ
-    if ci > 0 and 0 < cj < M - 1:
-        calculate({(ci, cj), (ci, cj - 1), (ci, cj + 1), (ci - 1, cj)})  # ㅗ
-    if 0 < ci < N - 1 and cj > 0:
-        calculate({(ci, cj), (ci - 1, cj), (ci + 1, cj), (ci, cj - 1)})  # ㅓ
-    if 0 < ci < N - 1 and cj < M - 1:
-        calculate({(ci, cj), (ci - 1, cj), (ci + 1, cj), (ci, cj + 1)})  # ㅏ
-
-
-def calculate(polyominos):
     global answer
-    sum_value = 0
-    for polyomino in polyominos:
-        i, j = polyomino
-        sum_value += board[i][j]
-    answer = max(answer, sum_value)
+    if ci < N - 1 and 0 < cj < M - 1:
+        sum_value = board[ci][cj] + board[ci][cj - 1] + board[ci][cj + 1] + board[ci + 1][cj]
+        answer = max(answer, sum_value)
+    if ci > 0 and 0 < cj < M - 1:
+        sum_value = board[ci][cj] + board[ci][cj - 1] + board[ci][cj + 1] + board[ci - 1][cj]
+        answer = max(answer, sum_value)
+    if 0 < ci < N - 1 and cj > 0:
+        sum_value = board[ci][cj] + board[ci - 1][cj] + board[ci + 1][cj] + board[ci][cj - 1]
+        answer = max(answer, sum_value)
+    if 0 < ci < N - 1 and cj < M - 1:
+        sum_value = board[ci][cj] + board[ci - 1][cj] + board[ci + 1][cj] + board[ci][cj + 1]
+        answer = max(answer, sum_value)
 
 
 diff = [(0, 1), (1, 0), (-1, 0), (0, -1)]
 N, M = map(int, sys.stdin.readline().split())
 board = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
-polyominos = set()
+check = [[0] * M for _ in range(N)]
 answer = 0
 
 for i in range(N):
     for j in range(M):
-        make_tetromino(i, j)
+        check[i][j] = 1
+        make_tetromino(i, j, board[i][j], 1)
+        check[i][j] = 0
         make_woo(i, j)
 print(answer)
