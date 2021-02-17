@@ -23,6 +23,24 @@ def bfs(graph, start_node):
     return visit
 ```
 
+## DFS(Depth First Search)
+DFS의 기본 작동 방식은 `stack`을 이용하는데, 직접적으로 `stack`을 이용하기 보다
+첫쨰줄에 `if`문으로 조건을 검사하여 `break`를 하거나 `return`으로 종료하고, 
+`else`문에 재귀적으로 자신을 호출하는 형태로 이루어진다.
+
+ ```python
+def dfs(graph, start_node):
+    visited = set()
+    stack = [start_node]
+    
+    while stack:
+        n = stack.pop()
+        if n not in visited:
+            visited.add(n)
+            stack += graph[n]
+    return visited
+```
+
 ## `우선순위 큐`
 > 우선순위 큐는 일반적인 FIFO 큐와 달리, 데이터 추가는 어떤 순서로 해도 상관없지만,
 > 제거될 떄는 가장 작은 값을 제거하는 자료구조이다.
