@@ -1,49 +1,34 @@
 package BOJ;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class baekjoon12865 {
-    static class Bag {
-        int weight;
-        int value;
-
-        Bag(int weight, int value) {
-            this.weight = weight;
-            this.value = value;
-        }
-    }
 
     static int n;
     static int k;
-    static Bag elements[];
-    static boolean isSelected[];
-    static int maxResult = 0;
+    static int weight[];
+    static int value[];
+    static int dp[][];
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
-        elements = new Bag[n];
-        isSelected = new boolean[n];
         k = sc.nextInt();
-        for (int i = 0; i < n; i++) {
-            int weight = sc.nextInt();
-            int value = sc.nextInt();
-            elements[i] = new Bag(weight, value);
-        }
-        dfs(0, 0, 0);
-        System.out.println(maxResult);
-    }
+        weight = new int[n];
+        value = new int[n];
+        dp = new int[n + 1][k + 1];
 
-    static void dfs(int current_weight, int current_value, int index) {
-        if (current_weight > k) {
-            maxResult = Math.max(maxResult, current_value-elements[index].value);
-            return;
-        }
         for (int i = 0; i < n; i++) {
-            isSelected[i] = true;
-            dfs(current_weight + elements[i].weight, current_value + elements[i].value, i);
-            isSelected[i] = false;
+            weight[i] = sc.nextInt();
+            value[i] = sc.nextInt();
         }
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= k; j++) {
+                if (weight[i-1] <= j) dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - weight[i-1]] + value[i-1]);
+                else dp[i][j] = dp[i - 1][j];
+            }
+        }
+        System.out.println(dp[n][k]);
     }
 }
