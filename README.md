@@ -82,6 +82,6 @@ git clone https://github.com/AMYMEME/algorithm-study.git
 - [x] [백준 #12865](https://www.acmicpc.net./problem/12865)
 
 
-### `2020.03.02`
+### `2021.03.02`
 
-- [x] [백준 #9251](https://www.acmicpc.net./problem/9251)
+- [ ] [백준 #9251](https://www.acmicpc.net./problem/9251)
