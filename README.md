@@ -26,7 +26,7 @@ git clone https://github.com/AMYMEME/algorithm-study.git
   에디터를 사용하실 경우 자동으로 생성되는 `.idea/`등 필요없는 파일들은 `.gitignore`에 추가해주세요.  
   공통 문제와 개인 문제를 모두 올려주신 이후 다른 사람이 쉽게 볼 수 있게 [깃허브 사이트](https://github.com/AMYMEME/algorithm-study/pulls)에서
   `Pull requests`이용해서 PR 띄워주세요!(`자기 브랜치` -> `main`)  
-  한 주 스터디가 끝날 때마다 각자 브랜치를 `merge` 해주시고, `git push`가 되지 않으면 `git pull`진행 후 해보시거나,
+  한 주 스터디가 끝날 때마다 *각자* 브랜치를 `merge` 해주시고, `git push`가 되지 않으면 `git pull`진행 후 해보시거나,
   카톡방에 공유해주세요!
 
 - 공통 문제는 `/common/스터디 날짜`에 올려주시면 됩니다.  
@@ -78,5 +78,10 @@ git clone https://github.com/AMYMEME/algorithm-study.git
 
 ### `2021.02.24`
 
-- [ ] [백준 #11000](https://www.acmicpc.net./problem/11000)
-- [ ] [백준 #12865](https://www.acmicpc.net./problem/12865)
+- [x] [백준 #11000](https://www.acmicpc.net./problem/11000)
+- [x] [백준 #12865](https://www.acmicpc.net./problem/12865)
+
+
+### `2021.03.02`
+
+- [ ] [백준 #9251](https://www.acmicpc.net./problem/9251)
