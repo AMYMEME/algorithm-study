@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
-public class baekjoon17225 {
+public class leesoeun98_baekjoon17225 {
 	static class Pair implements Comparable<Pair> {
 		int startTime;
 		String color;
@@ -18,9 +18,9 @@ public class baekjoon17225 {
 		}
 
 		/*
-		 * 우선순위 큐를 사용자지정 자료형으로 구현 시, compareTo를 오버라이드 해야 하는데 B가 R보다 우선순위가 높도록 작성해야 한다.
-		 * this.color와 p.color를 비교해서 자기자신(B)-상대(R)이면 -1을, 반대면 1을, 같으면 0을 반환, -1일 때 우선순위가
-		 * 높아서 자기자신이 앞에온다.
+		 * �슦�꽑�닚�쐞 �걧瑜� �궗�슜�옄吏��젙 �옄猷뚰삎�쑝濡� 援ы쁽 �떆, compareTo瑜� �삤踰꾨씪�씠�뱶 �빐�빞 �븯�뒗�뜲 B媛� R蹂대떎 �슦�꽑�닚�쐞媛� �넂�룄濡� �옉�꽦�빐�빞 �븳�떎.
+		 * this.color�� p.color瑜� 鍮꾧탳�빐�꽌 �옄湲곗옄�떊(B)-�긽��(R)�씠硫� -1�쓣, 諛섎�硫� 1�쓣, 媛숈쑝硫� 0�쓣 諛섑솚, -1�씪 �븣 �슦�꽑�닚�쐞媛�
+		 * �넂�븘�꽌 �옄湲곗옄�떊�씠 �븵�뿉�삩�떎.
 		 */
 		@Override
 		public int compareTo(Pair p) {
@@ -62,7 +62,7 @@ public class baekjoon17225 {
 			int m = Integer.parseInt(line[2]);
 			int cnt = 0;
 			if (line[1].equals("B")) {
-				// 앞의 선물 포장 끝나고 다음 포장 시작 고려
+				// �븵�쓽 �꽑臾� �룷�옣 �걹�굹怨� �떎�쓬 �룷�옣 �떆�옉 怨좊젮
 				if (maxs > time)
 					time = maxs;
 				for (int j = time; cnt < m; j += a) {
@@ -91,7 +91,7 @@ public class baekjoon17225 {
 			}
 		}
 
-		// 정답 출력
+		// �젙�떟 異쒕젰
 		bw.write(sangmingift.size() + "\n");
 		for (int i : sangmingift) {
 			bw.write(i + " ");

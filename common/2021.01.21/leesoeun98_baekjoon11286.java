@@ -1,7 +1,7 @@
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-public class baekjoon11286 {
+public class leesoeun98_baekjoon11286 {
     static class Number implements Comparable<Number> {
         int num;
 

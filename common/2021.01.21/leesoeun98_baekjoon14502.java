@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class baekjoon14502 {
+public class leesoeun98_baekjoon14502 {
     static class VirusDot {
         int x;
         int y;
