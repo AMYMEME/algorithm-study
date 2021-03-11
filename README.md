@@ -87,5 +87,11 @@ git clone https://github.com/AMYMEME/algorithm-study.git
 
 - [x] [백준 #9251](https://www.acmicpc.net./problem/9251)
 
+
 ### `2021.03.09`
-- [ ] [백준 자료구조 알고리즘](https://www.acmicpc.net/problemset?sort=ac_desc&algo=175)
+- [x] [백준 자료구조 알고리즘](https://www.acmicpc.net/problemset?sort=ac_desc&algo=175)
+
+
+### `2021.03.16`
+- [ ] [백준 #4256](https://www.acmicpc.net/problem/4256)
+- [ ] [백준 #1916](https://www.acmicpc.net/problem/1916)
