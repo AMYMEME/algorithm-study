@@ -17,6 +17,7 @@ def postorder(_preorder, _inorder):
 
 T = int(sys.stdin.readline())
 for _ in range(T):
+    print()
     _ = int(sys.stdin.readline())
     preorder = list(sys.stdin.readline().split())
     inorder = list(sys.stdin.readline().split())
