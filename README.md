@@ -21,13 +21,13 @@ git clone https://github.com/AMYMEME/algorithm-study.git
   초기 브랜치는 `main`으로 설정되어 있을텐데, 브랜치 새로 생성 및 교체 명령어는 `git checkout -b {브랜치명}`입니다.
   이후에 `main`에서 자기가 설정한 브랜치명으로 바뀌었는지 확인하시고 진행해주세요.
 
-- 모든 문제는 빌드가 꼬이지 않는 경우에 파이참에서 Open으로 열어서 수정 후
+- 모든 문제는 빌드가 꼬이지 않는 경우에 에디터에서 Open으로 열어서 수정 후
   터미널에서 git push 해도 되고, 단순히 터미널에서 vi로 붙여넣어도 됩니다.  
   에디터를 사용하실 경우 자동으로 생성되는 `.idea/`등 필요없는 파일들은 `.gitignore`에 추가해주세요.  
   공통 문제와 개인 문제를 모두 올려주신 이후 다른 사람이 쉽게 볼 수 있게 [깃허브 사이트](https://github.com/AMYMEME/algorithm-study/pulls)에서
-  `Pull requests`이용해서 PR 띄워주세요!(`자기 브랜치` -> `main`)
+  `Pull requests`이용해서 PR 띄워주세요!(`자기 브랜치` -> `main`)  
   *자바 등 빌드가 꼬이기 쉬울 경우는 프로젝트를 따로 만들어서 빌드/테스팅 하시고, 코드만 복붙하시는 걸 추천드립니다!*  
-  한 주 스터디가 끝날 때마다 *각자* 브랜치를 `merge` 해주시고, `git push`가 되지 않으면 `git pull`진행 후 해보시거나,
+  한 주 스터디가 끝날 때마다 **각자** 브랜치를 `merge` 해주시고, `git push`가 되지 않으면 `git pull`진행 후 해보시거나,
   카톡방에 공유해주세요!
 
 - 공통 문제는 `/common/스터디 날짜`에 올려주시면 됩니다.  
@@ -87,5 +87,11 @@ git clone https://github.com/AMYMEME/algorithm-study.git
 
 - [x] [백준 #9251](https://www.acmicpc.net./problem/9251)
 
+
 ### `2021.03.09`
-- [ ] [백준 자료구조 알고리즘](https://www.acmicpc.net/problemset?sort=ac_desc&algo=175)
+- [x] [백준 자료구조 알고리즘](https://www.acmicpc.net/problemset?sort=ac_desc&algo=175)
+
+
+### `2021.03.16`
+- [ ] [백준 #4256](https://www.acmicpc.net/problem/4256)
+- [ ] [백준 #1916](https://www.acmicpc.net/problem/1916)
