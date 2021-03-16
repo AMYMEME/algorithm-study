@@ -1,5 +1,5 @@
 import java.io.*;
-class epper15_08 {
+class HM210309_epper15_08 {
     static int chess[] = new int[14];
     static int answer=0;
 
