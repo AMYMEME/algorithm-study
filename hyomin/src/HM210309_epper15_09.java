@@ -1,5 +1,5 @@
 import java.util.*;
-class epper15_09 {
+class HM210309_epper15_09 {
     //solution 함수를 완성하세요.
     public static int solution(int[] n,int[][] r,int goal){
         int answer=0;

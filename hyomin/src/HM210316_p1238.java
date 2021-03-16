@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class p1238{
+public class HM210316_p1238 {
     public static class Node implements  Comparable<Node>{
         int dst;
         int weight;

@@ -1,75 +1,170 @@
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
 
-public class hyomin_1916_pq {
-    public static int cost(int n, int m, int[][] weight, int start, int finish){
-        int[] dis= new int[n+1]; //출발 정류장에서 각 정류장까지의 최소 비용을 담은 배열
-        boolean[] include = new boolean[n+1]; //스패닝 트리에 포함된 정류장인지 판별
-        //초기화
-        int select = start;
-        for(int i=1; i<=n; i++) {
+class Node implements Comparable<Node> {
+    int end;
+    int weight;
+
+    Node(int end, int weight) {
+        this.end = end;
+        this.weight = weight;
+    }
+
+    @Override
+    public int compareTo(Node o) {
+        return weight - o.weight;
+    }
+
+}
+
+public class p1916_pq {
+    static int N, M;
+    static ArrayList<ArrayList<Node>> a; // 인접리스트.
+    static int[] dist; // 시작점에서 각 정점으로 가는 최단거리.
+    static boolean[] check; // 방문 확인.
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st;
+        N = Integer.parseInt(br.readLine());
+        M = Integer.parseInt(br.readLine());
+
+        a = new ArrayList<>();
+        dist = new int[N + 1];
+        check = new boolean[N + 1];
+
+        Arrays.fill(dist, Integer.MAX_VALUE);
+
+        for (int i = 0; i <= N; i++) {
+            a.add(new ArrayList<>());
+        }
+
+        // 단방향 인접 리스트 구현.
+        for (int i = 0; i < M; i++) {
+            st = new StringTokenizer(br.readLine());
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
+            int weight = Integer.parseInt(st.nextToken());
+
+            // start에서 end로 가는 weight (가중치)
+            a.get(start).add(new Node(end, weight));
+        }
+
+        st = new StringTokenizer(br.readLine());
+        int startPos = Integer.parseInt(st.nextToken());
+        int endPos = Integer.parseInt(st.nextToken());
+
+        bw.write(dijkstra(startPos, endPos) + "\n");
+        bw.flush();
+        bw.close();
+        br.close();
+    }
+
+    // 다익스트라 알고리즘
+    public static int dijkstra(int start, int end) {
+        PriorityQueue<Node> pq = new PriorityQueue<>();
+        boolean[] check = new boolean[N + 1];
+        pq.offer(new Node(start, 0));
+        dist[start] = 0;
+
+        while (!pq.isEmpty()) {
+            Node curNode = pq.poll();
+            int cur = curNode.end;
+
+            if (!check[cur]) {
+                check[cur] = true;
+
+                for (Node node : a.get(cur)) {
+                    if (!check[node.end] && dist[node.end] > dist[cur] + node.weight) {
+                        dist[node.end] = dist[cur] + node.weight;
+                        pq.add(new Node(node.end, dist[node.end]));
+                    }
+                }
+            }
+        }
+        return dist[end];
+    }
+}
+
+
+/*
+* import java.util.*;
+
+//메모리 초과 해결 못함 ㅠㅠ
+
+public class p1916_pq {
+    public static class Node implements Comparable<Node>{
+        int end;
+        int weight;
+
+        public Node(int e, int w){
+            end = e;
+            weight = w;
+        }
+
+        @Override
+        public int compareTo(Node o){
+            return weight-o.weight; //숫자가 작을 수록 우선순위 높음
+        }
+    }
+
+    public static int cost(int n, int start, int finish){
+        PriorityQueue<Node> pq = new PriorityQueue<Node>();
+        int[] dis = new int[n+1];
+
+        for(int i=1; i<=n;i++){
             dis[i] = 100000;
-            include[i] = false;
         }
+
+        pq.add(new Node(start, 0));
         dis[start] = 0;
-        include[start] = true;
 
-        int k =0;
+        while(!pq.isEmpty()){
+            Node curNode = pq.poll();
+            int cur = curNode.end;
 
-        while(true){
-            if(select == finish) break;
-            //새로 선택된 도시에 대해 dis 배열 업데이트
-            //(수정) 모든 버스에 대한 반복문에서 도시에 대한 반복문으로 변경
-            //버스의 출발지가 select일때 update => select에 대한 모든 city에 대해 update
-            for(int i=1; i<=n;i++){
-                if(!include[i] && dis[select]+weight[select][i] < dis[i]){
-                    dis[i] = dis[select]+weight[select][i];
+            //cur 노드와 붙어있는 노드 중 길이가 업데이트 된 노드들을 pq에 추가
+            for(Node node: list[cur]){
+                if(dis[node.end] > dis[cur] + node.weight){
+                    dis[node.end] = dis[cur] + node.weight;
+                    pq.add(new Node(node.end, dis[node.end]));  //업데이트된 dis값을 넣음
                 }
             }
-            //dis 배열에서 추가할 도시 선택, 이미 선택된 도시는 포함할 수 없음
-            int min = 100000;
-            for(int i=1; i<=n; i++){
-                if(!include[i] && dis[i] < min){
-                    min = dis[i];
-                    select = i;
-                }
-            }
-            include[select] = true;
         }
+
         return dis[finish];
     }
+
+    static ArrayList<Node>[] list;
 
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
         int n = Integer.valueOf(input.nextLine());
         int m = Integer.valueOf(input.nextLine());
-        int[][] weight = new int[n+1][n+1]; //(수정) 메모리 초과로 Edge 배열에서 이차원 배열로 변경
-        boolean[][] check = new boolean[n+1][n+1]; //(수정) 같은 노선 버스 체크
 
-        //초기화
-        for(int i=1; i<=n;i++){
-            for(int j=1; j<=n; j++){
-                weight[i][j] = 100000;
-                check[i][j] = false;
-            }
-        }
+        list = new ArrayList[n+1];
+        for(int i=1;i<=n;i++) list[i] = new ArrayList<Node>();
 
         for(int i=0; i<m; i++){
             int s = input.nextInt();
             int e = input.nextInt();
             int v = input.nextInt();
-            if(!check[s][e]){
-                check[s][e] = true;
-                weight[s][e] = v;
-            }
-            else{
-                weight[s][e] = v < weight[s][e] ? v:weight[s][e];
-            }
+            list[s].add(new Node(e, v));
             input.nextLine();
         }
 
         int start = input.nextInt();
         int finish = input.nextInt();
 
-        System.out.println(cost(n, m, weight,start, finish));
+        System.out.println(cost(n, start, finish));
     }
 }
+
+* */

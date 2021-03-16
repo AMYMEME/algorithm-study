@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class p1992 {
+public class HM210316_p1992 {
     static char[][] video;
 
     public static String zip(int size, int x, int y){
