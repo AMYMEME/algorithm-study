@@ -19,3 +19,6 @@ for _ in range(n-1):
 print(total)
 hanoi(n,1,2,3)
 
+
+
+
