@@ -22,4 +22,32 @@ for i in range(case):
 
 
 
-     
+#https://www.acmicpc.net/problem/4256
+
+import sys
+
+def post(pre_,in_):
+    if len(pre_)==0:
+        return
+    elif len(pre_)==1:
+        print(pre_[0],end=" ")
+    elif len(pre_)==2:
+        print(pre_[1],pre_[0],end=" ")
+
+
+    idx=in_.index(pre_[0])
+    in_left=in_[0:idx]
+    pre_left=pre_[1:1+len(in_left)]
+    post(pre_left,in_left)
+
+    in_right=in_[idx+1:]
+    pre_right=pre_[1+len(pre_left):]
+    post(pre_right,in_right)
+    print(pre_[0],end=" ")
+
+case= int(sys.stdin.readline().strip())
+for i in range(case):
+    pre_=list(map(int,sys.stdin.readline().strip().split()))
+    in_=list(map(int,sys.stdin.readline().strip().split()))
+    post(pre_,in_)
+    print()     
