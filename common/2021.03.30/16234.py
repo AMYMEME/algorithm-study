@@ -2,62 +2,47 @@
 # 백준 16234 - 인구 이동
 
 import sys
-from collections import deque, defaultdict
+from collections import deque
 
 
-def dfs(i, j, flag):
-    global visited, count_dict
+def bfs(i, j):
     q = deque([(i, j)])
-    visited[i][j] = flag
-    count_dict[flag].add((i, j))
+    visited = {(i, j)}
+    board_check[i][j] = True
+    population = board[i][j]
     while q:
         ci, cj = q.popleft()
-        for di, dj in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
-            ni = ci + di
-            nj = cj + dj
-            if -1 < ni < N and -1 < nj < N and not visited[ni][nj]:
-                if L <= abs(board[ci][cj] - board[ni][nj]) <= R:
-                    dfs(ni, nj, flag)
+        for di, dj in [(0, 1), (0, -1), (-1, 0), (1, 0)]:
+            ni = di + ci
+            nj = dj + cj
+            if -1 < ni < N and -1 < nj < N and not board_check[ni][nj] and (ni, nj) not in visited:
+                if L <= abs(board[ni][nj] - board[ci][cj]) <= R:
+                    q.append((ni, nj))
+                    board_check[ni][nj] = True
+                    visited.add((ni, nj))
+                    population += board[ni][nj]
+    return visited, population // len(visited)
 
 
-def population_move():
-    global visited, count_dict
-    visited = [[0] * N for _ in range(N)]
-    count_dict = defaultdict(set)
-    flag = 1
-    for i in range(N):
-        for j in range(N):
-            if not visited[i][j]:
-                dfs(i, j, flag)
-                flag += 1
-    if flag == N * N + 1:
-        return False
-    population_calculate()
-    return True
-
-
-def population_calculate():
-    global board
-    for key in count_dict.keys():
-        total_population = 0
-        country_count = len(count_dict[key])
-        for i, j in count_dict[key]:
-            total_population += board[i][j]
-        result_value = total_population // country_count
-        for i, j in count_dict[key]:
-            board[i][j] = result_value
-
-
-sys.setrecursionlimit(10**6)
 N, L, R = map(int, sys.stdin.readline().split())
 board = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
-visited = list()
-count_dict = defaultdict(set)
+board_check = [[False] * N for _ in range(N)]
 move_count = 0
-
 while True:
-    restart = population_move()
-    if not restart:
-        break
-    move_count += 1
+    continue_flag = False
+    board_check = [[False] * N for _ in range(N)]
+    for i in range(N):
+        for j in range(N):
+            if board_check[i][j]:
+                continue
+            visited, next_population = bfs(i, j)
+            if len(visited) == 1:
+                continue
+            continue_flag = True
+            for move_i, move_j in visited:
+                board[move_i][move_j] = next_population
+    if continue_flag:
+        move_count += 1
+        continue
+    break
 print(move_count)
