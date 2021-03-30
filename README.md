@@ -43,66 +43,18 @@ git clone https://github.com/AMYMEME/algorithm-study.git
 
 ## 문제목록
 
-### `2021.01.06`
-
-- [x] [백준 #9012](https://www.acmicpc.net/problem/9012)
-
-### `2021.01.14`
-
-- [x] [백준 #15686](https://www.acmicpc.net/problem/15686)
-- [x] [백준 #17225](https://www.acmicpc.net/problem/17225)
-
-### `2021.01.21`
-
-- [x] [백준 #14502](https://www.acmicpc.net/problem/14502)
-- [x] [백준 #11286](https://www.acmicpc.net/problem/11286)
-
-
-### `2021.01.28`
-
-- [x] [백준 #16236](https://www.acmicpc.net/problem/16236)
-- [x] [백준 #14891](https://www.acmicpc.net/problem/14891)
-
-
-### `2021.02.04`
-
-- [x] [백준 #15684](https://www.acmicpc.net./problem/15684)
-- [x] [백준 #17144](https://www.acmicpc.net./problem/17144)
-
-
-### `2021.02.17`
-
-- [x] [백준 #2638](https://www.acmicpc.net./problem/2638)
-- [x] [백준 #11047](https://www.acmicpc.net./problem/11047)
-- [x] [백준 #14500](https://www.acmicpc.net./problem/14500)
-
-
-### `2021.02.24`
-
-- [x] [백준 #11000](https://www.acmicpc.net./problem/11000)
-- [x] [백준 #12865](https://www.acmicpc.net./problem/12865)
-
-
-### `2021.03.02`
-
-- [x] [백준 #9251](https://www.acmicpc.net./problem/9251)
-
-
-### `2021.03.09`
-- [x] [백준 자료구조 알고리즘](https://www.acmicpc.net/problemset?sort=ac_desc&algo=175)
-
-
-### `2021.03.16`
-- [x] [백준 #4256](https://www.acmicpc.net/problem/4256)
-- [x] [백준 #1916](https://www.acmicpc.net/problem/1916)
-
-
-### `2021.03.23`
-- [x] [백준 #1339](https://www.acmicpc.net/problem/1339)
-- [x] [백준 #1939](https://www.acmicpc.net/problem/1939)
-
-
-### `2021.03.30`
-- [ ] [백준 #16234](https://www.acmicpc.net/problem/16234)
-- [ ] [백준 #17822](https://www.acmicpc.net/problem/17822)
+날짜|문제
+---|-------
+`2021.01.06`| [백준 #9012](https://www.acmicpc.net/problem/9012)
+`2021.01.14`| [백준 #15686](https://www.acmicpc.net/problem/15686), [백준 #17225](https://www.acmicpc.net/problem/17225)
+`2021.01.21`| [백준 #14502](https://www.acmicpc.net/problem/14502), [백준 #11286](https://www.acmicpc.net/problem/11286)
+`2021.01.28`| [백준 #16236](https://www.acmicpc.net/problem/16236), [백준 #14891](https://www.acmicpc.net/problem/14891)
+`2021.02.04`| [백준 #15684](https://www.acmicpc.net./problem/15684), [백준 #17144](https://www.acmicpc.net./problem/17144)
+`2021.02.17`| [백준 #2638](https://www.acmicpc.net./problem/2638), [백준 #11047](https://www.acmicpc.net./problem/11047), [백준 #14500](https://www.acmicpc.net./problem/14500)
+`2021.02.24`| [백준 #11000](https://www.acmicpc.net./problem/11000), [백준 #12865](https://www.acmicpc.net./problem/12865)
+`2021.03.02`| [백준 #9251](https://www.acmicpc.net./problem/9251)
+`2021.03.09`| [백준 자료구조 알고리즘](https://www.acmicpc.net/problemset?sort=ac_desc&algo=175)
+`2021.03.16`| [백준 #4256](https://www.acmicpc.net/problem/4256), [백준 #1916](https://www.acmicpc.net/problem/1916)
+`2021.03.23`| [백준 #1339](https://www.acmicpc.net/problem/1339), [백준 #1939](https://www.acmicpc.net/problem/1939)
+`2021.03.30`| [백준 #16234](https://www.acmicpc.net/problem/16234), [백준 #17822](https://www.acmicpc.net/problem/17822)
 
