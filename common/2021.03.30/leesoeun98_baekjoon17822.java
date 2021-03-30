@@ -15,7 +15,6 @@ public class baekjoon17822 {
         m = sc.nextInt();
         t = sc.nextInt();
         board = new int[n + 1][m];
-        copy = new int[n + 1][m];
         for (int i = 1; i <= n; i++) {
             for (int j = 0; j < m; j++) {
                 board[i][j] = sc.nextInt();
@@ -43,6 +42,7 @@ public class baekjoon17822 {
                 }
             }
             //copy
+            copy = new int[n + 1][m];
             for (int row = 1; row <= n; row++) {
                 for (int col = 0; col < m; col++) {
                     copy[row][col] = board[row][col];
@@ -53,7 +53,7 @@ public class baekjoon17822 {
         }
 
         // 결과 출력
-        for (int[] temp : copy) {
+        for (int[] temp : board) {
             for (int t : temp) {
                 answer += t;
                 System.out.print(t);
@@ -80,35 +80,65 @@ public class baekjoon17822 {
     }
 
     public static void remove() {
-        for (int row = 1; row <= n - 1; row++) {
-            for (int col = 0; col < m - 1; col++) {
-                if (board[row][col] == board[row + 1][col]) {
-                    copy[row][col] = 0;
-                    copy[row + 1][col] = 0;
-                    same_count++;
-                } else if (board[row][col] == board[row][col + 1]) {
-                    copy[row][col] = 0;
-                    copy[row][col + 1] = 0;
-                    same_count++;
+        //인접한 것 지우기
+        same_count=0;
+        for (int row = 1; row <= n; row++) {
+            for (int col = 0; col < m ; col++) {
+                int sco = board[row][col];
+                if(sco!=0){
+                    if(row>1 && board[row-1][col]==sco){
+                        copy[row-1][col]=0;
+                        copy[row][col]=0;
+                        same_count++;
+                    }
+                    if(row<n && board[row+1][col]==sco){
+                        copy[row+1][col]=0;
+                        copy[row][col]=0;
+                        same_count++;
+                    }
+                    if(col>0 && board[row][col-1]==sco){
+                        copy[row][col-1]=0;
+                        copy[row][col]=0;
+                        same_count++;
+                    }
+                    if(col<m-1 && board[row][col+1]==sco){
+                        copy[row][col+1]=0;
+                        copy[row][col+1]=0;
+                        same_count++;
+                    }
+                    if(col==0 && board[row][m-1]==sco){
+                        copy[row][m-1]=0;
+                        copy[row][col]=0;
+                        same_count++;
+                    }
+                    if(col==m-1 && board[row][0]==sco){
+                        copy[row][0]=0;
+                        copy[row][col]=0;
+                        same_count++;
+                    }
                 }
             }
         }
+        board=copy;
         // 인접 수 없으면 평균 +-1
         if (same_count == 0) {
             int sum = 0;
             int count = 0;
-            double avg = 0;
-            for (int[] arr : copy) {
+            double avg;
+            for (int[] arr : board) {
                 for (int a : arr) {
                     sum += a;
-                    count++;
+                    // 이거 제발 주의
+                    if(a!=0)count++;
                 }
             }
             avg = sum / (double) count;
             for (int i = 1; i <= n; i++) {
                 for (int j = 0; j < m; j++) {
-                    if (copy[i][j] > avg) copy[i][j] -= 1;
-                    else if (copy[i][j] < avg) copy[i][j] += 1;
+                    //얘도 주의
+                    if(board[i][j]==0) continue;
+                    else if (board[i][j] > avg) board[i][j]--;
+                    else if (board[i][j] < avg) board[i][j]++;
                 }
             }
         }
