@@ -23,7 +23,7 @@ def bfs(c):
     while queue:
         x=queue.popleft()
         for y,weight in adj[x]:
-            if not visit[y] and c<=weight:
+            if not visit[y] and c<=weight: #한번의 이동 & 중량 넘지 않아야 함
                 queue.append(y)
                 visit[y]=True
     
