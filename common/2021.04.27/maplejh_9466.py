@@ -10,13 +10,13 @@ def dfs(start):
     global final
     visit[start] = 1
     loop.append(start)
-
-    if visit[students[start]]:
-        if students[start] in loop:
-            final += loop[loop.index(students[start]):]
+    next=students[start]
+    if visit[next]:
+        if next in loop:
+            final += loop[loop.index(next):]
             return
     else:
-        dfs(students[start])
+        dfs(next)
 
 
 T = int(sys.stdin.readline())
