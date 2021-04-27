@@ -61,7 +61,6 @@ for i in range(r):
             maps[i][j] = '.'
         elif maps[i][j] == '*':
             waterq.append((i, j))
+water()
 # 물 -> 고슴도치 순
 bfs(startx, starty)
-print(maps)
-print(hedgehogmap)
