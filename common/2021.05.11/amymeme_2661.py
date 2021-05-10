@@ -3,13 +3,12 @@ import sys
 
 def check(l):
     for window_size in range(2, len(l) // 2 + 1):
-        i = 0
-        while i <= len(l) - window_size * 2:
-            window = l[i:i + window_size]
-            next_window = l[i + window_size:i + window_size * 2]
-            if window == next_window:
-                return False
-            i += 1
+        window_end = len(l)
+        window_start = window_end - window_size
+        window = l[window_start:window_end]
+        past = l[window_start - window_size:window_end - window_size]
+        if window == past:
+            return False
     return True
 
 
