@@ -2,18 +2,24 @@ import sys
 
 N, S = map(int, sys.stdin.readline().split())
 series = list(map(int, sys.stdin.readline().split()))
-answer = N
-
+answer = N + 1
 
 left = 0
-while left < N:
-    right = left
-    #TODO : sum 대신 앞 더하고 뒤 빼기
-    while S >= sum(series[left:right+1]) and right < N:
+right = 0
+_sum = 0
+
+while right <= N:
+    if _sum < S:
+        if right == N:
+            break
+        _sum += series[right]
         right += 1
-    if S > sum(series[left:right+1]):
-        break
-    if answer > right - left + 1:
-        answer = right - left + 1
+        continue
+    _sum -= series[left]
     left += 1
-print(answer)
+    answer = min(answer, right - left + 1)
+
+if answer == N + 1:
+    print(0)
+else:
+    print(answer)
