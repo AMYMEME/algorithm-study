@@ -1,34 +1,24 @@
 import sys
 
 
-def check(l):
-    for window_size in range(2, len(l) // 2 + 1):
-        window_end = len(l)
-        window_start = window_end - window_size
-        window = l[window_start:window_end]
-        past = l[window_start - window_size:window_end - window_size]
-        if window == past:
-            return False
-    return True
-
-
-def dfs(l):
+def dfs(idx):
     global answer
-    if len(l) == N:
-        value = int(l)
-        if value < answer:
-            answer = value
-        return
+    for window_size in range(2, idx // 2 + 1):
+        if answer[-2 * window_size:-window_size] == answer[-window_size:]:
+            return False
+    if idx == N:
+        return True
     for i in range(1, 4):
-        if l[-1] == str(i):
+        if answer[idx - 1] == i:
             continue
-        if check(l + str(i)):
-            dfs(l + str(i))
+        answer.append(i)
+        if dfs(idx + 1):
+            return True
+        answer.pop()
 
 
 N = int(sys.stdin.readline())
-line = '1'
-answer = int('3' * N)
+answer = [1]
 
-dfs(line)
-print(answer)
+dfs(1)
+print(*answer, sep="")
