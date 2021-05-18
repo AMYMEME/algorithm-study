@@ -1,0 +1,66 @@
+from collections import deque
+
+r, c = map(int, input().split())
+maps = [list(input()) for i in range(r)]
+
+waterq = deque()
+hedgehogq = deque()
+
+hedgehogmap = [[0] * c for i in range(r)]
+
+xd = [-1, 1, 0, 0]
+yd = [0, 0, -1, 1]
+
+startx = starty = 0
+
+
+def water():
+    # queue에 있는 물만 퍼져야 함 (즉, 새로 추가된 물은 다음에 퍼져야 함)
+    qlen = len(waterq)
+    while qlen:
+        x, y = waterq.popleft()
+        for d in range(4):
+            nearx = x + xd[d]
+            neary = y + yd[d]
+            if 0 <= nearx < r and 0 <= neary < c and maps[nearx][neary] == '.':
+                maps[nearx][neary] = '*'
+                waterq.append((nearx, neary))
+        qlen -= 1
+
+
+def bfs(startx, starty):
+    hedgehogq.append((startx, starty))
+    hedgehogmap[startx][starty] = 0
+    while hedgehogq:
+        # queue에 새로 추가된 위치는 다음에 처리해야 함 (while lenq동안 고슴도치 이동
+        lenq = len(hedgehogq)
+        while lenq:
+            x, y = hedgehogq.popleft()
+            for d in range(4):
+                nearx = x + xd[d]
+                neary = y + yd[d]
+                if 0 <= nearx < r and 0 <= neary < c:
+                    if maps[nearx][neary] == '.' and hedgehogmap[nearx][neary] == 0:
+                        hedgehogmap[nearx][neary] = hedgehogmap[x][y] + 1
+                        hedgehogq.append((nearx, neary))
+                    elif maps[nearx][neary] == 'D':
+                        print(hedgehogmap[x][y]+1)
+                        return
+            lenq -= 1
+        water()
+    # 앞에서 안끝났으면 불가능한 경우이므로
+    print("KAKTUS")
+    return
+
+
+for i in range(r):
+    for j in range(c):
+        if maps[i][j] == 'S':
+            startx = i
+            starty = j
+            maps[i][j] = '.'
+        elif maps[i][j] == '*':
+            waterq.append((i, j))
+water()
+# 물 -> 고슴도치 순
+bfs(startx, starty)
