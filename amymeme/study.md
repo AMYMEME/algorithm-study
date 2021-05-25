@@ -83,3 +83,45 @@ def heap_sort(nums):
         sorted_nums.append(heapq.heappop(heap))
     return sorted_nums
 ```
+
+### `트리`
+파이썬에서 트리는 클래스로 구현할 수 있다.
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+```
+```python
+class Tree:
+    def __init__(self):
+        self.root = None
+
+    def preorder(self, node):
+        print(node.data, end=' ')
+        if node.left is not None:
+            self.preorder(node.left)
+        if node.right is not None:
+            self.preorder(node.right)
+
+    def inorder(self, node):
+        if node.left is not None:
+            self.inorder(node.left)
+        print(node.data, end=' ')
+        if node.right is not None:
+            self.inorder(node.right)
+
+    def postorder(self, node):
+        if node.left is not None:
+            self.postorder(node.left)
+        if node.right is not None:
+            self.postorder(node.right)
+        print(node.data, end=' ')
+
+    def make_root(self, node, left_node, right_node):
+        if self.root:
+            self.root = node
+        node.left = left_node
+        node.right = right_node
+```
