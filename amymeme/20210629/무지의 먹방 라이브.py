@@ -1,20 +1,21 @@
-def next_turn(food_times, cur_turn):
-    length = len(food_times)
-    diff = 1
-    while food_times[(cur_turn + diff) % length] == 0:
-        diff += 1
-    return (cur_turn + diff) % length
-
-
 def solution(food_times, k):
-    turn = 0
-    while k:
-        food_times[turn] -= 1
-        if not any(food_times):
-            break
-        turn = next_turn(food_times, turn)
-        k -= 1
-    if not any(food_times):
+    if sum(food_times) <= k:
         return -1
-    else:
-        return turn + 1
+
+    foods = []
+    for idx, value in enumerate(food_times):
+        foods.append((value, idx + 1))
+    foods.sort()
+
+    bottom = 0
+    n = len(foods)
+
+    for idx, (value, number) in enumerate(foods):
+        if k < (value - bottom) * n:
+            numbers = list(map(lambda x: x[1], foods[idx:]))
+            numbers.sort()
+            order = k % len(numbers)
+            return numbers[order]
+        k -= (value - bottom) * n
+        bottom = value
+        n -= 1
