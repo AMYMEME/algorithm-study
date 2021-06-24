@@ -1,20 +1,16 @@
-import heapq
-
-
 def solution(strs, t):
-    pq = []
-    satis_length_set = {0}
-    heapq.heappush(pq, (0, 0))
-    while pq:
-        str_cnt, satis_length = heapq.heappop(pq)
-        if satis_length == len(t):
-            return str_cnt
-        if satis_length > len(t):
-            break
-        goal_str = t[satis_length:]
-        for word in strs:
-            if goal_str.find(word) == 0:
-                if satis_length + len(word) in satis_length_set:
-                    continue
-                heapq.heappush(pq, (str_cnt + 1, satis_length + len(word)))
-    return -1
+    length = len(t)
+    dp = [0] * (length + 1)
+
+    for t_idx in range(1, length + 1):
+        dp[t_idx] = float('inf')
+
+        for word_len in range(1, 6):
+            if word_len > t_idx:
+                start = 0
+            else:
+                start = t_idx - word_len
+            if t[start:t_idx] in strs:
+                dp[t_idx] = min(dp[t_idx - word_len] + 1, dp[t_idx])
+
+    return dp[-1] if dp[-1] != float('inf') else -1
