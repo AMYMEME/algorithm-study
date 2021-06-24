@@ -1,5 +1,6 @@
 # https://www.acmicpc.net/problem/1956
 # 운동
+# pypy
 import sys
 
 V, E = map(int, sys.stdin.readline().split())
