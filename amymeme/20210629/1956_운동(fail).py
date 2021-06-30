@@ -10,7 +10,6 @@ def bfs(start_v):
     pq = []
     for v, weight in graph[start_v]:
         heapq.heappush(pq, (weight, v))
-        visited.add(v)
 
     while pq:
         weight, v = heapq.heappop(pq)
@@ -31,7 +30,7 @@ has_in = set()
 for road in range(E):
     start, end, weight = map(int, sys.stdin.readline().split())
     graph[start - 1].append((end - 1, weight))
-    has_in.add(end)
+    has_in.add(end - 1)
 
 result = float('inf')
 for v in has_in:
