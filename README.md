@@ -64,4 +64,4 @@ git clone https://github.com/AMYMEME/algorithm-study.git
 `2021.05.18`| [프로그래머스 #가장 먼 노드](https://programmers.co.kr/learn/courses/30/lessons/49189), [프로그래머스 #네트워크](https://programmers.co.kr/learn/courses/30/lessons/43162)
 `2021.05.25`| [백준 #13913](https://www.acmicpc.net/problem/13913), [백준 #17281](https://www.acmicpc.net/problem/17281)
 `2021.06.29`| [백준 #2239](https://www.acmicpc.net/problem/2239), [백준 #1956](https://www.acmicpc.net/problem/1956)
-`2021.07.06`| [백준 #1976](https://www.acmicpc.net/problem/1976), [백준 #2096](https://www.acmicpc.net/problem/2096), [백준 #7576](https://www.acmicpc.net/problem/7576)
+`2021.07.06`| [백준 #1976](https://www.acmicpc.net/problem/1976), [백준 #2096](https://www.acmicpc.net/problem/2096), [백준 #7579](https://www.acmicpc.net/problem/7579)
