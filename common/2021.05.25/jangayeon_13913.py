@@ -5,11 +5,11 @@ from collections import deque
 def path(x):
     arr = []
     temp = x
-    for _ in range(dist_time[x]+1):\
-        temp = route[temp]
+    for _ in range(dist_time[x]+1):
         arr.append(temp)
+        temp = route[temp]
         #담아논 이전까지의 경로
-    print(' '.join(map(str,  arr[::-1])))
+    print(' '.join(map(str,  arr[::-1]))) #역순으로 출력
 
 def bfs():
     q = deque()
