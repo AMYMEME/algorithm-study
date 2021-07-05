@@ -1,39 +1,40 @@
 #문제 : https://www.acmicpc.net/problem/
 
-/*구상 
-Union Find : 간선 잇는 두 정점 구하기
-*/
-def Find(x):#x의 루트노드찾기
-    if p[x]<0:
+import sys
+
+def find(x):#x의 루트노드찾기
+    if P[x]<0:
         return x
     else:
-        y=Find(p[x])
-        p[x]=y
-        return y
+        y=find(P[x])
+        P[x]=y
+        return P[x]
  
-def Union(x,y):
-    x_p=Find(x)
-    y_p=Find(y)
-    if x_p != y_p:#루트노드가 같지 않으면
-        p[y_p]=x_p#루트노드를 다른 루트노드에 붙여준다.
+def union(x,y):
+    x_root=find(x)
+    y_root=find(y)
+    if x_root != y_root:#루트노드가 같지 않으면
+        P[y_root]=x_root#루트노드를 다른 루트노드에 붙여준다.
  
  
- 
+#전체 도시수 
 N=int(sys.stdin.readline())
-p=[-1]*(N+1)
+#주어진 원소 갯수 만큼 사용하지 않을 값 -1 생성
+P=[-1]*(N+1)  #도시가 1부터 시작해서 (N+1)로 통일
+#여행 계획에 속한 도시 수
 M=int(sys.stdin.readline())
-# [[] for _ in range(N+1)]
+
 for i in range(N):
     connection=list(map(int,sys.stdin.readline().split()))
     for j in range(i+1,N): #양방향
         if connection[j]: #짝
-            Union(i+1,j+1)
+            union(i+1,j+1)
  
 check=True
-t_plan=list(map(int,sys.stdin.readline().split()))
-tmp=Find(t_plan[0])
+t_route=list(map(int,sys.stdin.readline().split())) #여행 경로
+t_root=find(t_route[0])
 for i in range(M):#루트 동일?
-    if Find(t_plan[i])!=tmp:
+    if find(t_route[i])!=t_root:
         check=False
         break
  
@@ -41,5 +42,3 @@ if check:
     print("YES")
 else:
     print("NO")
- 
- 
