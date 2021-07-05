@@ -1,35 +1,20 @@
 # https://www.acmicpc.net/problem/2096
 # BOJ 2096 - 내려가기
 
-'''
-3
-1 2 3
-4 5 6
-4 9 0
-'''
-
 import sys
 
 N = int(sys.stdin.readline())
 
-board = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
+dp_min = [0, 0, 0]
+dp_max = [0, 0, 0]
 
-min_dp = [board[0]]
-max_dp = [board[0]]
+for _ in range(N):
+    row = list(map(int, sys.stdin.readline().split()))
 
-for i in range(1, N):
-    min_dp.append([])
-    max_dp.append([])
-    # [i][0]
-    min_dp[i].append(min(min_dp[i-1][0], min_dp[i-1][1]) + board[i][0])
-    max_dp[i].append(max(max_dp[i - 1][0], max_dp[i - 1][1]) + board[i][0])
+    pre_dp_min = [min(dp_min[:2]), min(dp_min), min(dp_min[1:])]
+    pre_dp_max = [max(dp_max[:2]), max(dp_max), max(dp_max[1:])]
 
-    # [i][1]
-    min_dp[i].append(min(min_dp[i - 1][0], min_dp[i - 1][1], min_dp[i - 1][2]) + board[i][1])
-    max_dp[i].append(max(max_dp[i - 1][0], max_dp[i - 1][1], max_dp[i - 1][2]) + board[i][1])
+    dp_min = [x + y for (x, y) in zip(row, pre_dp_min)]
+    dp_max = [x + y for (x, y) in zip(row, pre_dp_max)]
 
-    # [i][2]
-    min_dp[i].append(min(min_dp[i - 1][1], min_dp[i - 1][2]) + board[i][2])
-    max_dp[i].append(max(max_dp[i - 1][1], max_dp[i - 1][2]) + board[i][2])
-
-print(max(max_dp[-1]), min(min_dp[-1]))
+print(max(dp_max), min(dp_min))
