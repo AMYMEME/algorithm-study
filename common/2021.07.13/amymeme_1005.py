@@ -1,32 +1,58 @@
 # https://www.acmicpc.net/problem/1005
 # ACM Craft
 
-from collections import defaultdict
 import sys
+from collections import deque
 
 T = int(sys.stdin.readline())
-graph = defaultdict(set)
-max_time = 0
-
-
-def dfs(cur, cur_time):
-    global max_time
-    if not graph[cur]:
-        max_time = max(max_time, cur_time)
-        return
-    for nxt in graph[cur]:
-        dfs(nxt, cur_time + times[nxt - 1])
-
 
 for _ in range(T):
     N, K = map(int, sys.stdin.readline().split())
-    times = list(map(int, sys.stdin.readline().split()))
+
+    graph = [[0, 0, 0, set()] for _ in range(N)]  # building_time, sum_building_time, in_degree, out_vertexes
+
+    for idx, value in enumerate(map(int, sys.stdin.readline().split())):
+        graph[idx][0] = value
+        graph[idx][1] = value  # initialize
 
     for _ in range(K):
-        before, after = map(int, sys.stdin.readline().split())
-        graph[after].add(before)
-    goal_building = int(sys.stdin.readline())
-    dfs(goal_building, times[goal_building - 1])
-    print(max_time)
-    max_time = 0
-    graph.clear()
+        in_v, out_v = map(int, sys.stdin.readline().split())
+        in_v -= 1
+        out_v -= 1
+        graph[out_v][2] += 1
+        graph[in_v][3].add(out_v)
+
+    goal = int(sys.stdin.readline())
+    # print(graph)
+
+    leaves = deque(filter(lambda x: x[2] == 0, graph))
+
+    while leaves:
+        building_time, sum_time, in_degree, out_vertexes = leaves.popleft()
+        for nxt in out_vertexes:
+            graph[nxt][2] -= 1
+            graph[nxt][1] = max(graph[nxt][1], graph[nxt][0] + sum_time)
+            if graph[nxt][2] == 0:
+                leaves.append(graph[nxt])
+    print(graph[goal - 1][1])
+'''
+2
+4 4
+10 1 100 10
+1 2
+1 3
+2 4
+3 4
+4
+8 8
+10 20 1 5 8 7 1 43
+1 2
+1 3
+2 4
+2 5
+3 6
+5 7
+6 7
+7 8
+7
+'''
