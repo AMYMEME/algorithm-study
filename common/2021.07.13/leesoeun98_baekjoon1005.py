@@ -1,14 +1,15 @@
 from collections import deque
-for _ in range(int(input())):
-    n, k = map(int, input().split())
-    delay=[0]+list(map(int, input().split()))
+import sys
+for _ in range(int(sys.stdin.readline())):
+    n, k = map(int, sys.stdin.readline().split())
+    delay=[0]+list(map(int, sys.stdin.readline().split()))
     buildings=[[] for _ in range(n+1)]
     indegree=[0]*(n+1)
     for _ in range(k):
-        x, y = map(int, input().split())
+        x, y = map(int, sys.stdin.readline().split())
         buildings[x].append(y)
         indegree[y]+=1
-    must=int(input())
+    must=int(sys.stdin.readline())
 
     dp=[0]*(n+1)
     queue=deque()
