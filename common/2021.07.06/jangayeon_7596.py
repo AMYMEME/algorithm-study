@@ -1,22 +1,22 @@
-#문제 : https://www.acmicpc.net/problem/7596
-/* 구상
-익은 날짜 저장
-3차원 BFS
-*/
-def solution():
-    cnt = 1
-    while True:
-        N = int(input())
-        if not N:
-            break
-        array = []
-
-        for i in range(N):
-            array.append(str(input()))
-
-        array.sort()
-        print(cnt)
-        cnt += 1
-
-        for i in array:
-            print(i)
+#문제 : https://www.acmicpc.net/problem/7579
+import sys
+input = sys.stdin.readline
+ 
+ 
+N, M = map(int, input().split())
+memory = list(map(int, input().split()))
+cost = list(map(int, input().split()))
+ 
+max_cost = (sum(cost)+1)
+dp = [[0]*max_cost for _ in range(N+1)]
+_min = max_cost
+for i in range(1, N+1):
+    for j in range(len(dp[0])):
+        if j < cost[i-1]:
+            dp[i][j] = dp[i-1][j]
+        else:
+            dp[i][j] = max(dp[i-1][j], dp[i-1][j-cost[i-1]] + memory[i-1])
+        if dp[i][j] >= M and _min > j:
+            _min = j
+ 
+print(_min)
