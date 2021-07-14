@@ -1,3 +1,8 @@
+#문제 : https://www.acmicpc.net/problem/2096
+#구상 : dp 배열의 슬라이딩 윈도우 
+#2차원 배열로
+#점화식 : D[i][0] = max(D[i-1][0], D[i-1][1]) + arr[0] */
+
 n=int(input())
 table=[list(map(int,input().split()))for _ in range(n)]
 large=small=table[0]
