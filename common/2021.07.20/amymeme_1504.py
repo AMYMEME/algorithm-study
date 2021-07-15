@@ -2,53 +2,32 @@
 # 특정한 최단 경로
 
 import sys
-from collections import defaultdict, deque
-import heapq
+
+inf = float('INF')
 
 
-def dijkstra(start, to):
-    # 모든 정점까지의 거리 배열을 구하지 않고 to까지만 구함
-    pq = [(0, start)]  # weight from start, v
-    visited = set()
-
-    while pq:
-        cur_w, cur_v = heapq.heappop(pq)
-        if cur_v in visited:
-            continue
-        visited.add(cur_v)
-        if cur_v == to:
-            return cur_w
-        for nxt_w, nxt_v in graph[cur_v]:
-            if nxt_v in visited:
-                continue
-            heapq.heappush(pq, (cur_w + nxt_w, nxt_v))
-    return -1
+def floyd():
+    global graph
+    for aux in range(N):
+        for start in range(N):
+            for to in range(N):
+                if graph[start][aux] < inf and graph[aux][to] < inf:
+                    graph[start][to] = min(graph[start][to], graph[start][aux] + graph[aux][to])
 
 
 def solution(start, aux1, aux2, dest):
-    answer = 0
-    distance = dijkstra(start, aux1)
-    if distance == -1:
+    if graph[start][aux1] == inf or graph[aux1][aux2] == inf or graph[aux1][dest] == inf:
         return -1
-    answer += distance
-    distance = dijkstra(aux1, aux2)
-    if distance == -1:
-        return -1
-    answer += distance
-    distance = dijkstra(aux2, dest)
-    if distance == -1:
-        return -1
-    answer += distance
-    return answer
+    return graph[start][aux1] + graph[aux1][aux2] + graph[aux2][dest]
 
 
-graph = defaultdict(set)
 N, E = map(int, sys.stdin.readline().split())
+graph = [[inf] * N for _ in range(N)]
 
 for _ in range(E):
     a, b, c = map(int, sys.stdin.readline().split())
-    graph[a].add((c, b))  # v, weight
-    graph[b].add((c, a))
-
+    graph[a - 1][b - 1] = c
+    graph[b - 1][a - 1] = c
 v1, v2 = map(int, sys.stdin.readline().split())
-print(min(solution(1, v1, v2, N), solution(1, v2, v1, N)))
+floyd()
+print(min(solution(0, v1 - 1, v2 - 1, N - 1), solution(0, v2 - 1, v1 - 2, N - 1)))
