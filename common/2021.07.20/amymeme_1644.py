@@ -2,21 +2,23 @@
 # 소수의 연속합
 
 import sys
-import math
+
+
+def get_prime_list(n):
+    # https://ko.wikipedia.org/wiki/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98_%EC%B2%B4
+    sieve = [True] * (n + 1)
+    for i in range(2, int(n ** .5) + 1):
+        if sieve[i]:  # i가 소수인 경우
+            for j in range(i + i, n + 1, i):  # i이후 i의 배수들을 False 판정
+                sieve[j] = False
+    return [x for x in range(2, n + 1) if sieve[x]]
+
 
 N = int(sys.stdin.readline())
-if N == 1:
+prime_list = get_prime_list(N)
+if not prime_list:
     print(0)
     exit(0)
-prime_list = []
-for i in range(2, N + 1):
-    is_prime = True
-    for j in range(2, int(math.sqrt(i)) + 1):
-        if i % j == 0:
-            is_prime = False
-            break
-    if is_prime:
-        prime_list.append(i)
 
 # initialize
 left = 0
