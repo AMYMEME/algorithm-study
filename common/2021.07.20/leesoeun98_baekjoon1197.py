@@ -1,19 +1,31 @@
+import heapq
+import collections
 v, e = map(int, input().split())
-tree=[[0]*(v+1) for _ in range(v+1)]
+graph = collections.defaultdict(list)
 check=[0]*(v+1)
-res=[]
+
 for _ in range(e):
-    a, b, c = map(int, input().split())
-    tree[a][b]=c
-    tree[b][a]=c
+    start, end, weight = map(int, input().split())
+    graph[start].append([weight, start, end])
+    graph[end].append([weight, end, start])
 
-def dfs(i, visited, cnt):
-    for next in range(len(tree[i])):
-        if next not in visited and tree[i][next]!=0 :
-            visited+=[next]
-            cnt+=tree[i][next]
-    return cnt
+def prim(start):
+    check[start]=1
+    candidate = graph[start]
+    heapq.heapify(candidate)
+    tree=[]
+    res=0
 
-for i in range(1, v+1):
-    res.append(dfs(i, [i], 0))
-print(min(res))
+    while candidate:
+        weight, start, end = heapq.heappop(candidate)
+        if check[end]==0:
+            check[end]=1
+            tree.append([start, end])
+            res+=weight
+
+            for next in graph[end]:
+                if check[next[2]]==0:
+                    heapq.heappush(candidate, next)
+    return res
+
+print(prim(1))
