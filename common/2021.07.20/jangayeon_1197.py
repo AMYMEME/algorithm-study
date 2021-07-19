@@ -1,26 +1,26 @@
 #문제: https://www.acmicpc.net/problem/1197
 
-def find_parent(parent, x):
-    if parent[x] != x:
-        parent[x] = find_parent(parent, parent[x])
-    return parent[x]
+def find_parent(p, x):
+    if p[x] != x:
+        p[x] = find_parent(p, p[x])
+    return p[x]
 
 
-def make_union(parent, a, b):
-    a = find_parent(parent, a)
-    b = find_parent(parent, b)
+def union(p, a, b):
+    a = find_parent(p, a)
+    b = find_parent(p, b)
     if a < b:
-        parent[b] = a
+        p[b] = a
     else:
-        parent[a] = b
+        p[a] = b
 
 
 V, E = map(int, input().split())
 graph = []
 
-parent = [0] * (V + 1)
+p = [0] * (V + 1)
 for i in range(V + 1):
-    parent[i] = i
+    p[i] = i
 
 for _ in range(E):
     A, B, C = map(int, input().split())
@@ -29,7 +29,7 @@ for _ in range(E):
 
 graph.sort()
 count = 0
-answer = 0
+ans = 0
 
 while graph:
     if count == (V-1):
@@ -37,10 +37,10 @@ while graph:
 
     C,A,B = graph.pop(0)
 
-    if find_parent(parent, A) == find_parent(parent, B):
+    if find_parent(p, A) == find_parent(p, B):
         continue
     else:
-        make_union(parent, A, B)
+        union(p, A, B)
         count += 1
-        answer += C
-print(answer)
+        ans += C
+print(ans)
