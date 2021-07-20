@@ -1,25 +1,6 @@
 # https://www.acmicpc.net/problem/15685
 # 드래곤 커브
-'''
-def rotate(center, target):
-    ci, cj = center
-    ti, tj = target
-    ti -= ci
-    tj -= cj
-    ti, tj = -tj, ti
-    return ti + ci, tj + cj
 
-dots = set()
-
-for _ in range(N):
-    x, y, d, g = map(int, sys.stdin.readline().split())
-    local_dots = {(x, y), (x + directions[d][0], y + directions[d][1])}
-    for i in range(g):
-        print(local_dots)
-        for dot in local_dots:
-            rotate()
-    directions[d]
-'''
 import sys
 
 N = int(sys.stdin.readline())
