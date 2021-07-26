@@ -2,68 +2,50 @@
 # 불!
 
 import sys
-from collections import deque, defaultdict
 
 
-def bfs(init_set):
-    visited = set()
-    possibles = defaultdict(int)
-    for i, j, _ in init_set:
-        visited.add((i, j))
-        if 0 < i < R - 1:
-            if j == 0 or j == C - 1:
-                possibles[(i, j)] = 0
-        else:
-            possibles[(i, j)] = 0
-
-    q = deque(init_set)
-    while q:
-        ci, cj, time = q.popleft()
-        for di, dj in diff:
-            ni = ci + di
-            nj = cj + dj
-            if ni < 0 or ni > R - 1 or nj < 0 or nj > C - 1:
-                continue
-            if board[ni][nj] == '#' or (ni, nj) in visited:
-                continue
-            if 0 < ni < R - 1:
-                if nj == 0 or nj == C - 1:
-                    possibles[(ni, nj)] = time + 1
-            else:
-                possibles[(ni, nj)] = time + 1
-            visited.add((ni, nj))
-            q.append((ni, nj, time + 1))
-    return possibles
+def start(fires, jihun):
+    time = 0
+    while jihun:
+        time += 1
+        tmp_fires = []
+        for fi, fj in fires:
+            for di, dj in diff:
+                ni = fi + di
+                nj = fj + dj
+                if -1 < ni < R and -1 < nj < C and board[ni][nj] != '#' and board[ni][nj] != 'F':
+                    tmp_fires.append((ni, nj))
+                    board[ni][nj] = 'F'
+        fires = tmp_fires
+        tmp_jihun = []
+        for ji, jj in jihun:
+            for di, dj in diff:
+                ni = ji + di
+                nj = jj + dj
+                if -1 < ni < R and -1 < nj < C:
+                    if board[ni][nj] == '.':
+                        tmp_jihun.append((ni, nj))
+                        board[ni][nj] = str(time)
+                else:
+                    return time
+        jihun = tmp_jihun
+    return "IMPOSSIBLE"
 
 
 R, C = map(int, sys.stdin.readline().split())
 diff = [(0, -1), (0, 1), (-1, 0), (1, 0)]
-fires = set()
-jihun = set()
+
+fires = []
+jihun = []
 
 board = []
 for i in range(R):
-    row = sys.stdin.readline().strip()
+    row = list(sys.stdin.readline().strip())
     board.append(row)
     for j, value in enumerate(row):
         if value == 'J':
-            jihun.add((i, j, 0))
+            jihun.append((i, j))
         elif value == 'F':
-            fires.add((i, j, 0))
+            fires.append((i, j))
 
-jihun_possibles = bfs(jihun)
-fire_possibles = bfs(fires)
-for (i, j), time in sorted(jihun_possibles.items(), key=lambda x: x[1]):
-    if (i, j) not in fire_possibles.keys() or fire_possibles[(i, j)] > time:
-        print(time + 1)
-        exit(0)
-print("IMPOSSIBLE")
-
-'''
-5 5
-#####
-#...#
-#.JF#
-#...#
-#####
-'''
+print(start(fires, jihun))
