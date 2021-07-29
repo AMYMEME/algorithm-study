@@ -1,61 +1,45 @@
 #문제: https://www.acmicpc.net/problem/4179
 
-불 bfs-> 불 bfs 돌린거 적용해서 지훈이 bfs 돌기
+"""
+큐 : 불 좌표 -> 사람 좌표
+BFS 탐색  : 미로 나가기까지 최소 탐색 횟수
+사람은 빈칸으로만 이동 가능
+"""
 
+from sys import stdin
 from collections import deque
-import sys
+input = stdin.readline
 
-input = sys.stdin.readline
-dx = [1, -1, 0, 0]
-dy = [0, 0, 1, -1]
+R, C = map(int, input().split())
+a = [list(input().strip()) for _ in range(R)]
+dist = [[0]*C for _ in range(R)]
+q = deque()
+
+for i in range(R):
+    for j in range(C):
+        if a[i][j] == 'J': #사람 위치
+            sx, sy = i, j 
+        elif a[i][j] == 'F': #불 위치
+            q.append((i, j, 1)) #불부터 enque
+            dist[i][j] = 1 #불이 1초만에 갈 수 있는 거리
 
 def bfs():
-    fqlen = len(fq)
-    while fqlen:
-        x, y = fq.popleft()
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-            if 0 <= nx < r and 0 <= ny < c:
-                if a[nx][ny] == '.':
-                    a[nx][ny] = 'F'
-                    fq.append([nx, ny])
-        fqlen -= 1
-
-    qlen = len(q)
-    while qlen:
-        x, y = q.popleft()
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-            if nx < 0 or ny < 0 or nx >= r or ny >= c:
-                print(check[x][y])
+    q.append((sx, sy, 0)) #사람 원래 위치 (사람 가장 마지막에 enque)
+    dist[sx][sy] = 1 #사람이 1초만에 갈 수 있는 거리
+    while q: #더이상 탐색할 불과 사람이 없을 때 까지
+        x, y, f = q.popleft()
+        for dx, dy in (-1, 0), (0, 1), (1, 0), (0, -1): #4 방향 탐색
+            nx, ny = x+dx, y+dy #이동
+            if nx < 0 or nx >= R or ny < 0 or ny >= C: #더이상 이동 불가능한 곳인 경우
+                if f: #다른 방향으로 이동
+                    continue
+                print(dist[x][y])
                 return
-            else:
-                if a[nx][ny] == '.' and not check[nx][ny]:
-                    check[nx][ny] = check[x][y] + 1
-                    q.append([nx, ny])
-        qlen -= 1
-        
-    if q:
-        bfs()
-    else:
-        print("IMPOSSIBLE")
-
-r, c = map(int, input().split())
-check = [[0]*c for _ in range(r)]
-a, q, fq = [], deque(), deque()
-
-for i in range(r):
-    row = list(input().strip())
-    a.append(row)
-    for j, key in enumerate(row):
-        if key == 'J':
-            q.append([i, j])
-            check[i][j] = 1
-            a[i][j] = '.'
-        elif key == 'F':
-            check[i][j] = 1
-            fq.append([i, j])
+            if not dist[nx][ny] and a[nx][ny] != '#': #전에 방문한 적 없거나 빈 곳인 경우 도달 가능
+                #현재 시간이 정점의 시간보다 빠른 경우 -> 이동가능 
+                q.append((nx, ny, f)) #새롭게 도달한 곳 추가
+                dist[nx][ny] = dist[x][y]+1 #도달 시간 추가
+    print("IMPOSSIBLE")
 
 bfs()
+
