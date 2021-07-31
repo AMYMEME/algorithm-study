@@ -1,22 +1,25 @@
-#문제 :  https://www.acmicpc.net/problem/1520
+#문제 :  https://www.acmicpc.net/problem/2263
 
-from sys import stdin
+import sys
+input=sys.stdin.readline
+sys.setrecursionlimit(10**9)
+def divide(root,left,right,plus):
+    if left>right or right<left:
+        return
+    print(root,end=' ')
+    temp=num[root-1]
+    L=temp-left
+    R=right-temp
+    if plus+L-1<n:
+        divide(post_order[plus+L-1],left,temp-1,plus)
+    if plus+L+R-1<n:
+        divide(post_order[plus+L+R-1],temp+1,right,plus+L)
 
-m, n = map(int, stdin.readline().split())
-M = [list(map(int, stdin.readline().split())) for _ in range(m)]
-dp = [[-1] * n for _ in range(m)]
-
-
-def dfs(x, y):
-    if x == m - 1 and y == n - 1:
-        return 1
-    if dp[x][y] == -1:
-        dp[x][y] = 0
-        for dx, dy in (1, 0), (-1, 0), (0, 1), (0, -1):
-            if 0 <= x+dx < m and 0 <= y+dy < n:
-                if M[x+dx][y+dy] < M[x][y]:
-                    dp[x][y] += dfs(x+dx, y+dy)
-    return dp[x][y]
-
-
-print(dfs(0, 0))
+n=int(input())
+in_order=list(map(int,input().split()))
+post_order=list(map(int,input().split()))
+num=[0]*n
+for i in range(n):
+    num[in_order[i]-1]=i
+root=post_order[-1]
+divide(root,0,n-1,0)
