@@ -7,6 +7,14 @@
 #풀이 참고 : https://kangmin1012.tistory.com/7
 
 
+"""
+아직 방문 X인 것에 대한 bfs 탐색 진행
+bfs 탐색 횟수 = 빙하 갯수
+큐에 넣는 순간 방문했다고 표시해서 중복으로 탐색 진행되는 것 방지
+빙하가 녹는 작업은 입력되었을 때 상하좌우 기준으로 진행
+"""
+
+
 import sys
 from collections import deque
 def bfs(i,j,visit) :
@@ -27,7 +35,7 @@ def bfs(i,j,visit) :
             # 사방향 탐색 시 0일 경우 melt_cnt 증가
                 else :
                     melt_cnt += 1
-        if melt_cnt :
+        if melt_cnt : #녹은 것이 있으면 갱신
             melting_que.append([i,j,melt_cnt])
     return melting_que
 
@@ -51,7 +59,7 @@ while True :
     if cnt == 0 :
         year = 0
         break
-    if cnt >= 2 :
+    if cnt >= 2 : #2년 이상으로 분리됨!!
         break
     year += 1  # 일 년 증가
     # 빙산의 갯수가 0이거나 2일 경우 반복문 종료
