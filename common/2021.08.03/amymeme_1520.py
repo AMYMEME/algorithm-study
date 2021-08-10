@@ -28,12 +28,4 @@ while pq:
             dp[ni][nj] += dp[i][j]
             heapq.heappush(pq, (-board[ni][nj], ni, nj))
 
-
 print(dp[-1][-1])
-'''
-4 5
-50 45 37 32 30
-35 50 40 20 25
-30 30 25 17 28
-27 24 22 15 10
-'''
