@@ -70,4 +70,4 @@ git clone https://github.com/AMYMEME/algorithm-study.git
 `2021.07.27`| [백준 #2252](https://www.acmicpc.net/problem/2252), [백준 #2573](https://www.acmicpc.net/problem/2573), [백준 #4179](https://www.acmicpc.net/problem/4179)
 `2021.08.03`| [백준 #1520](https://www.acmicpc.net/problem/1520), [백준 #1937](https://www.acmicpc.net/problem/1937), [백준 #2263](https://www.acmicpc.net/problem/2263)
 `2021.08.10`| [백준 #1516](https://www.acmicpc.net/problem/1516), [백준 #2571](https://www.acmicpc.net/problem/2571), [백준 #4485](https://www.acmicpc.net/problem/4485)
-`2021.08.17`| [백준 #1328](https://www.acmicpc.net/problem/1328), [백준 #15927](https://www.acmicpc.net/problem/15927), [백준 #17142](https://www.acmicpc.net/problem/17142)
+`2021.08.19`| [백준 #1328](https://www.acmicpc.net/problem/1328), [백준 #15927](https://www.acmicpc.net/problem/15927), [백준 #17142](https://www.acmicpc.net/problem/17142)
