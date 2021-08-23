@@ -14,7 +14,7 @@ def maxSize():
             tmp_size = h * (now-left)
             max_size = max(max_size, tmp_size)
         stack.append([heights[now],left])
-   
+
     for h, point in stack:
         max_size = max(max_size, (N-point)*h)
 
